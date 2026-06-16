@@ -1,12 +1,22 @@
 package roomescape.domain;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Embeddable
 public record Slot(
         LocalDate date,
+
+        @ManyToOne
+        @JoinColumn(name = "time_id")
         ReservationTime time,
+
+        @ManyToOne
+        @JoinColumn(name = "theme_id")
         Theme theme
 ) {
 

@@ -1,11 +1,17 @@
 package roomescape.domain;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import roomescape.domain.exception.BusinessRuleViolationException;
 import roomescape.domain.exception.ForbiddenException;
 
+@Entity
 public class Reservation {
 
     private static final String NOT_OWNER = "본인의 예약이 아닙니다.";
@@ -14,9 +20,18 @@ public class Reservation {
     private static final String PAST_RESERVATION_UPDATE_REJECTED = "지난 시각으로 예약을 변경할 수 없습니다.";
     private static final String PAST_RESERVATION_CANCEL_REJECTED = "이미 지난 예약은 취소할 수 없습니다.";
 
-    private final Long id;
-    private final Member reserver;
-    private final Slot slot;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Embedded
+    private Member reserver;
+
+    @Embedded
+    private Slot slot;
+
+    protected Reservation() {
+    }
 
     public Reservation(
             Long id,

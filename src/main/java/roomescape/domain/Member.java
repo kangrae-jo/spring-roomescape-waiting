@@ -1,7 +1,9 @@
 package roomescape.domain;
 
+import jakarta.persistence.Embeddable;
 import roomescape.domain.exception.BusinessRuleViolationException;
 
+@Embeddable
 public record Member(
         String name
 ) {
