@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -12,6 +14,10 @@ import roomescape.domain.exception.BusinessRuleViolationException;
 import roomescape.domain.exception.ForbiddenException;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(
+        name = "unique_reservation_date_time_theme",
+        columnNames = {"date", "theme_id", "time_id"}
+))
 public class Reservation {
 
     private static final String NOT_OWNER = "본인의 예약이 아닙니다.";

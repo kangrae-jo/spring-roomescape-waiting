@@ -14,13 +14,13 @@ public class Theme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String description;
 
-    @Column
+    @Column(name = "thumbnail_image_url", nullable = false)
     private String thumbnailImageUrl;
 
     protected Theme() {
